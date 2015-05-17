@@ -20,3 +20,10 @@ So, no automated builds.
 ## generating filesystem image
 
     docker run --privileged -i -t -v $PWD:/srv centos:centos6 /srv/build.sh
+
+## machine architecture
+
+Image archive filename contains architecture name now.
+If you build your image on i386 machine(docker container), this script build centos4-32bit image.
+I have only x86_64 and i686 machine, so I couldn't check on alpha, ia64, s390(x).
+

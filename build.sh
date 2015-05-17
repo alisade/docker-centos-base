@@ -8,7 +8,13 @@ exec 0<&-
 
 set -e -u -x
 
-DEST_IMG="/srv/centos49.tar.gz"
+ARCH=`uname -p`
+case $ARCH in
+  i686) ARCH="i386";;
+esac
+
+
+DEST_IMG="/srv/centos49-$ARCH.tar.gz"
 
 rm -f ${DEST_IMG}
 
@@ -27,13 +33,13 @@ distroverpkg=centos-release
 
 [c4-base]
 name=CentOS-4 - Base
-baseurl=http://vault.centos.org/4.9/os/x86_64/
+baseurl=http://vault.centos.org/4.9/os/$ARCH/
 gpgcheck=1
 gpgkey=http://vault.centos.org/RPM-GPG-KEY-CentOS-4
 
 [c4-updates]
 name=CentOS-4 - Updates
-baseurl=http://vault.centos.org/4.9/updates/x86_64/
+baseurl=http://vault.centos.org/4.9/updates/$ARCH/
 gpgcheck=1
 gpgkey=http://vault.centos.org/RPM-GPG-KEY-CentOS-4
 EOF
@@ -77,7 +83,7 @@ sed -i \
 
 ## epel
 curl -f -L -o ${instroot}/tmp/RPM-GPG-KEY-EPEL-4 http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-4
-curl -f -L -o ${instroot}/tmp/epel-release-4-10.noarch.rpm https://dl.fedoraproject.org/pub/epel/4/x86_64/epel-release-4-10.noarch.rpm
+curl -f -L -o ${instroot}/tmp/epel-release-4-10.noarch.rpm https://dl.fedoraproject.org/pub/epel/4/$ARCH/epel-release-4-10.noarch.rpm
 chroot ${instroot} rpm --import /tmp/RPM-GPG-KEY-EPEL-4
 chroot ${instroot} yum localinstall -y /tmp/epel-release-4-10.noarch.rpm
 rm -f ${instroot}/tmp/epel-release-4-10.noarch.rpm ${instroot}/tmp/RPM-GPG-KEY-EPEL-4
