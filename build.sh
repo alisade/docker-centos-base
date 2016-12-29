@@ -96,4 +96,5 @@ rm -f ${instroot}/etc/resolv.conf
 
 ## xz gives the smallest size by far, compared to bzip2 and gzip, by like 50%!
 ## … but somewhere along the line Docker stopped supporting it.
+# gzip was causing erros when bulding the docker images, had to go with just tar
 chroot ${instroot} tar -cf - . > ${DEST_IMG}
