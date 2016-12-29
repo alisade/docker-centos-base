@@ -14,7 +14,7 @@ case $ARCH in
 esac
 
 
-DEST_IMG="/srv/centos49-$ARCH.tar.gz"
+DEST_IMG="/srv/centos49-$ARCH.tar"
 
 rm -f ${DEST_IMG}
 
@@ -96,4 +96,4 @@ rm -f ${instroot}/etc/resolv.conf
 
 ## xz gives the smallest size by far, compared to bzip2 and gzip, by like 50%!
 ## … but somewhere along the line Docker stopped supporting it.
-chroot ${instroot} tar -czf - . > ${DEST_IMG}
+chroot ${instroot} tar -cf - . > ${DEST_IMG}
