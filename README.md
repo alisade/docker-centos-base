@@ -1,4 +1,4 @@
-# From-scratch CentOS 4.9 Docker image
+# From-scratch CentOS 4.9 and Centos 5.11 Docker image 
 
 As-minimal-as-possible CentOS 4.9 image using `yum` and some `chroot` magic.
 The idea of checking in a large, opaque binary file makes me itch, but the
